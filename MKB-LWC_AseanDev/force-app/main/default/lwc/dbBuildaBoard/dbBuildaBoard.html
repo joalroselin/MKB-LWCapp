@@ -1,0 +1,26 @@
+<template>
+    <lightning:card title="Build Your Custom Board Here">
+        <div class="slds-card slds-var-m-top_medium slds-var-m-bottom_x-large">
+            <h2 class="slds-text-heading_small slds-var-m-bottom_medium">
+                I am...
+            </h2>
+            <div class="slds-card">
+                <div class="slds-var-m-around_medium">
+                    <lightning-button label="a Newbie" title="Newbie" icon-name={toggleIconName}
+                        onclick={handleToggleClick} variant="outline" data-id="btnNew">
+                    </lightning-button>
+                    <lightning-button label="Experienced" title="Experienced" icon-name={toggleIconName}
+                        onclick={handleExpClick} variant="outline" data-id="btnExp">
+                    </lightning-button>
+                    <lightning-button label="an Enthusiast" title="Enthusiast" icon-name={toggleIconName}
+                        onclick={handleEntClick}variant="outline" data-id="btnEnt">
+                    </lightning-button>
+                </div>
+            </div>
+            <div class="slds-card">
+                <lightning-button label="Custom Build" onclick={handleCustomNav} variant="brand" data-id="btnCustom"></lightning-button>
+            </div>
+        </div>
+
+    </lightning:card >
+</template>

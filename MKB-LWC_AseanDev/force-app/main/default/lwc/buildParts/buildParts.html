@@ -1,0 +1,62 @@
+<template>
+    <lightning-card  class="slds-var-m-bottom_small">
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_2-of-12">
+                <div class="slds-var-p-around_small slds-var-m-bottom_small">Board</div>
+                <div class="slds-var-p-around_small slds-var-m-bottom_small">Switches</div>
+                <div class="slds-var-p-around_small slds-var-m-bottom_small">Keycaps</div>
+            </div>
+            <div class="slds-col slds-size_10-of-12">
+                <div class="slds-var-p-around_small">
+                    <lightning-button label="Choose your Board" title="Add Part" onclick={handleAddPart} class="slds-var-m-left_small" icon-name="utility:add"></lightning-button>
+                </div>
+                <div class="slds-var-p-around_small">
+                    <lightning-button label="Choose your Switches" title="Add Part" onclick={handleAddPart} class="slds-var-m-left_small" icon-name="utility:add"></lightning-button>
+                </div>
+                <div class="slds-var-p-around_small">
+                    <lightning-button label="Choose your Keycaps" title="Add Part" onclick={handleAddPart} class="slds-var-m-left_small" icon-name="utility:add"></lightning-button>
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+    <lightning-card>
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_2-of-12">
+                <div class="slds-var-p-around_small slds-var-m-bottom_small">Stabilizers</div>
+                <div class="slds-var-p-around_small slds-var-m-bottom_small">Accessory</div>
+            </div>
+            <div class="slds-col slds-size_10-of-12">
+                <div class="slds-var-p-around_small">
+                    <lightning-button label="Choose your Stabilizers" title="Add Part" onclick={handleAddPart} class="slds-var-m-left_small" icon-name="utility:add"></lightning-button>
+                </div>
+                <div class="slds-var-p-around_small">
+                    <lightning-button label="Choose your Accessory" title="Add Part" onclick={handleAddPart} class="slds-var-m-left_small" icon-name="utility:add"></lightning-button>
+                </div>
+            </div>
+        </div>
+        
+    </lightning-card>
+    <template if:true={handleAddPart} tabindex="-1"  role="dialog" class="slds-modal slds-fade-in-open slds-modal_large">
+        <div class="slds-modal__container">
+          <header class="slds-modal__header">
+            <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" label="Close" title="Close">
+              <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+              </svg>
+              <span class="slds-assistive-text">Close</span>
+            </button>
+            <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">{partModalHeader}Boards</h2>
+          </header>
+          <div class="slds-modal__content slds-var-p-around_medium" id="modal-content-id-1">
+            <p>Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud elit officia tempor esse quis. Cillum sunt ad dolore quis
+              aute consequat ipsum magna exercitation reprehenderit magna. Tempor cupidatat consequat elit dolor adipisicing.</p>
+          </div>
+          <footer class="slds-modal__footer slds-modal__footer_directional">
+            <button label="Cancel" class="slds-button slds-button_neutral" onclick={closeModal}>Cancel</button>
+            <button label="Next" onclick={submitDetails} class="slds-button slds-button_brand">Next</button>
+          </footer>
+        </div>
+    </template>
+      <!-- <div class="slds-backdrop slds-backdrop_open"></div> -->
+    
+</template>
