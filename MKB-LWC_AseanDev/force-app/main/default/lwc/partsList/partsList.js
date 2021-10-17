@@ -1,17 +1,24 @@
+import { publish, MessageContext } from 'lightning/messageService';
 import { LightningElement, api, wire } from 'lwc';
-
-// Lightning Message Service and message channels
-import { publish, subscribe, MessageContext } from 'lightning/messageService';
-import PRODUCTS_FILTERED_MESSAGE from '@salesforce/messageChannel/ProductsFiltered__c';
-import PRODUCT_SELECTED_MESSAGE from '@salesforce/messageChannel/ProductSelected__c';
-
-// getProducts() method in ProductController Apex class
-import getProducts from '@salesforce/apex/PartsController.getAllBoards';
-
+import PART_LIST_UPDATE_MESSAGE from '@salesforce/messageChannel/PartsListUpdate__c';
+import searchBoards from '@salesforce/apex/PartsController.searchBoards';
 export default class PartsList extends LightningElement {
     searchBoardTerm = '';
-    partsBoards;
+    boards;
     
+    @wire(MessageContext) messageContext;
+    @wire(searchBoards, {searchBoardTerm: '$searchBoardTerm'})
+    loadBoards(result) {
+        this.boards = result;
+        if(result.data) {
+
+            const message ={
+                boards: result.data
+            };
+            publish(this.messageContext, PART_LIST_UPDATE_MESSAGE, message);
+        }
+    }
+
     handleSearchTermChange(e) {
 		window.clearTimeout(this.delayTimeout);
 		const searchBoardTerm = e.target.value;

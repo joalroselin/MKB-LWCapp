@@ -56,7 +56,7 @@ public with sharing class PartsController {
     // }
 
     @AuraEnabled(Cacheable=true)
-    public static MKB_Board__c[] getAllBoards(Id boardId) {
+    public static MKB_Board__c[] getAllBoards() {
         return [
             SELECT
                 Id,
@@ -71,11 +71,37 @@ public with sharing class PartsController {
                 Keys__c,
                 In_Stock__c
             FROM MKB_Board__c
-            WHERE Id != :boardId
             WITH SECURITY_ENFORCED
         ];
     }
 
+    @AuraEnabled(Cacheable=true)
+    public static MKB_Board__c[] searchBoards(String searchBoardTerm) {
+        searchBoardTerm = searchBoardTerm.trim();
+        if (searchBoardTerm == '' ) {
+            return getAllBoards();
+        }
+
+        searchBoardTerm = '%' + searchBoardTerm + '%';
+
+        return [
+            SELECT
+                Id,
+                Name,
+                Layout__c,
+                Material__c,
+                PCB__c,
+                Plate__c,
+                Price__c,
+                Quantity__c,
+                Vendor__r.Name,
+                Keys__c,
+                In_Stock__c
+            FROM MKB_Board__c
+            WHERE Name LIKE :searchBoardTerm
+            ORDER BY Name
+        ];
+    }
     // @AuraEnabled(Cacheable=true)
     // public static MKB_Switch__c[] getAllSwitches() {
     //     return [
